@@ -1,7 +1,7 @@
-import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SingUp from "./components/SingUp";
-import { Layout, Menu, Breadcrumb } from "antd";
+import { Layout, Menu } from "antd";
+import Login from "./components/Login";
 
 const { Header, Content, Footer } = Layout;
 function App() {
@@ -25,10 +25,8 @@ function App() {
         >
           <BrowserRouter>
             <Routes>
-              <Route
-                path="/register"
-                element={<SingUp />}
-              />
+              <Route path="/register" element={<SingUp />} />
+              <Route path="/login" element={<Login />} />
             </Routes>
           </BrowserRouter>
         </div>
