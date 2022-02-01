@@ -25,6 +25,7 @@ function App() {
         >
           <BrowserRouter>
             <Routes>
+              
               <Route path="/register" element={<SingUp />} />
               <Route path="/login" element={<Login />} />
             </Routes>

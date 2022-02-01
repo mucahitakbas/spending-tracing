@@ -1,13 +1,10 @@
-import { Form, Input, Button,message } from "antd";
-import { Axios, AxiosResponse } from "axios";
+import { Form, Input, Button } from "antd";
 
 import { useNavigate } from "react-router-dom";
 
 import api from "../utils/api";
+import showError from "../utils/showError";
 
-const Showerror = (errorMessage:string) => {
-    message.error(errorMessage);
-  };
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
@@ -23,17 +20,15 @@ const validateMessages = {
   },
 };
 
-
 function SingUp() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const onFinish = async (values: any) => {
     try {
       await api.post("/users/register", values);
       navigate(`/login`);
     } catch (error) {
       console.log({ error });
-      Showerror((error as any).response.data.errorMessage);
-      
+      showError((error as any).response.data.errorMessage);
     }
   };
   return (
