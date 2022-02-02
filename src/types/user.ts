@@ -6,7 +6,7 @@ export interface User {
   username: string;
   email: string;
   full_name: string;
-  tokne: string;
+  token: string;
 }
 export interface LoginForm {
   username: string;

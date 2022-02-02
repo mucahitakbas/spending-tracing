@@ -2,6 +2,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SingUp from "./components/SingUp";
 import { Layout, Menu } from "antd";
 import Login from "./components/Login";
+import PrivateRoute from "./components/PrivateRoute";
+import Categories from "./components/Categories";
 
 const { Header, Content, Footer } = Layout;
 function App() {
@@ -25,7 +27,10 @@ function App() {
         >
           <BrowserRouter>
             <Routes>
-              
+            <Route element={<PrivateRoute />}>
+              <Route path="/categories" element={<Categories />} />
+            </Route>
+
               <Route path="/register" element={<SingUp />} />
               <Route path="/login" element={<Login />} />
             </Routes>
