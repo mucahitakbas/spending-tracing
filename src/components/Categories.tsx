@@ -10,7 +10,7 @@ import {
 } from "../store/actions/categoryActions";
 import { Category, CategoryForm } from "../types/category";
 import { HexColorPicker } from "react-colorful";
-
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 type Mode = "new" | "edit" | "delete";
 
 const emptyForm: CategoryForm = {
@@ -69,23 +69,23 @@ function Categories() {
       key: "action",
       render: (text: string, category: Category) => (
         <Space size="middle">
-          <a
+          <EditOutlined
+            style={{ color: "#1890ff" }}
             onClick={() => {
               showModal("edit");
               setForm(category);
               setFormId(category.id);
             }}
-          >
-            Invite {category.name}
-          </a>
-          <a
+          />
+
+          <DeleteOutlined
+            twoToneColor="#286ce3"
+            style={{ color: "red" }}
             onClick={() => {
               showModal("delete");
               setFormId(category.id);
             }}
-          >
-            Delete
-          </a>
+          />
         </Space>
       ),
     },
@@ -98,40 +98,52 @@ function Categories() {
   return (
     <React.Fragment>
       <div>
-        <Button type="primary" onClick={() => showModal("new")}>
-          New Categoyr
-        </Button>
+        <div style={{ marginBottom: "10px" ,float:"right" }}>
+          <Button type="primary" onClick={() => showModal("new")}>
+            New Categoyr
+          </Button>
+        </div>
         <Modal
-          title={mode === "new" ? "Create New Category" : "Update Category"}
+          title={
+            mode === "new"
+              ? "Create New Category"
+              : mode === "edit"
+              ? "Update Category"
+              : "Delete Category"
+          }
           visible={isModalVisible}
           onOk={handleOk}
           onCancel={handleCancel}
-          okButtonProps={{ disabled: !form.name }}
+          okButtonProps={{ disabled: !(mode === "delete") && !form.name }}
         >
-          <Form labelCol={{ span: 5 }} wrapperCol={{ span: 16 }}>
-            <Form.Item label="Name">
-              <Input
-                name="name"
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-              />
-            </Form.Item>
-            <Form.Item label="Select">
-              <Select
-                value={form.type}
-                defaultValue="expense"
-                onChange={(value) => setForm({ ...form, type: value })}
-              >
-                <Select.Option value="income">Income</Select.Option>
-                <Select.Option value="expense">Expense</Select.Option>
-              </Select>
-            </Form.Item>
-            <Form.Item label="Color">
-              <HexColorPicker
-                onChange={(color) => setForm({ ...form, color: color })}
-              />
-            </Form.Item>
-          </Form>
+          {mode === "edit" || mode === "new" ? (
+            <Form labelCol={{ span: 5 }} wrapperCol={{ span: 16 }}>
+              <Form.Item label="Name">
+                <Input
+                  name="name"
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                />
+              </Form.Item>
+              <Form.Item label="Select">
+                <Select
+                  value={form.type}
+                  defaultValue="expense"
+                  onChange={(value) => setForm({ ...form, type: value })}
+                >
+                  <Select.Option value="income">Income</Select.Option>
+                  <Select.Option value="expense">Expense</Select.Option>
+                </Select>
+              </Form.Item>
+              <Form.Item label="Color">
+                <HexColorPicker
+                  onChange={(color) => setForm({ ...form, color: color })}
+                />
+              </Form.Item>
+            </Form>
+          ) : mode === "delete" ? (
+            <p>Are you sure?</p>
+          ) : null}
         </Modal>
       </div>
       <Table dataSource={data} columns={columns} />
