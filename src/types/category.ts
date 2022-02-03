@@ -11,6 +11,11 @@ export interface Category {
   type: string;
   color: string;
 }
+export interface CategoryForm {
+  name: string;
+  type: "income" | "expense" | {};
+  color?: string;
+}
 interface GET_START {
   type: "GET_CATEGORIES_START";
 }
@@ -21,7 +26,23 @@ interface GET_SUCCESS {
 interface GET_ERROR {
   type: "GET_CATEGORIES_ERROR";
 }
-export type CategoryAction = GET_START | GET_SUCCESS | GET_ERROR;
+interface ADD_START {
+  type: "ADD_CATEGORIES_START";
+}
+interface ADD_SUCCESS {
+  type: "ADD_CATEGORIES_SUCCESS";
+  payload: Category;
+}
+interface ADD_ERROR {
+  type: "ADD_CATEGORIES_ERROR";
+}
+export type CategoryAction =
+  | GET_START
+  | GET_SUCCESS
+  | GET_ERROR
+  | ADD_START
+  | ADD_SUCCESS
+  | ADD_ERROR;
 export type CategoryDispathc = ThunkDispatch<
   CategoryState,
   void,

@@ -6,6 +6,7 @@ import { AppState } from "../store";
 import { login } from "../store/actions/userActions";
 import { LoginForm } from "../types/user";
 import showError from "../utils/showError";
+import Categories from "./Categories";
 
 function Login() {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ function Login() {
   const onFinish = (values: LoginForm) => {
     dispatch(login(values));
     console.log(login);
+    
   };
   useEffect(() => {
     error && showError(error);

@@ -1,6 +1,5 @@
 import { type } from "os";
 import { ThunkDispatch } from "redux-thunk";
-
 export interface User {
   message: string;
   username: string;
