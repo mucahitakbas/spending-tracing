@@ -4,6 +4,7 @@ import { Layout, Menu } from "antd";
 import Login from "./components/Login";
 import PrivateRoute from "./components/PrivateRoute";
 import Categories from "./components/Categories";
+import Records from "./components/Records";
 
 const { Header, Content, Footer } = Layout;
 function App() {
@@ -11,11 +12,7 @@ function App() {
     <Layout>
       <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
         <div className="logo" />
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["2"]}>
-          <Menu.Item key="1">nav 1</Menu.Item>
-          <Menu.Item key="2">nav 2</Menu.Item>
-          <Menu.Item key="3">nav 3</Menu.Item>
-        </Menu>
+        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["2"]}></Menu>
       </Header>
       <Content
         className="site-layout"
@@ -27,9 +24,12 @@ function App() {
         >
           <BrowserRouter>
             <Routes>
-            <Route element={<PrivateRoute />}>
-              <Route path="/categories" element={<Categories />} />
-            </Route>
+              <Route element={<PrivateRoute />}>
+                <Route path="/categories" element={<Categories />} />
+              </Route>
+              <Route element={<PrivateRoute />}>
+                <Route path="/records" element={<Records />} />
+              </Route>
 
               <Route path="/register" element={<SingUp />} />
               <Route path="/login" element={<Login />} />
