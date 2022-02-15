@@ -5,37 +5,31 @@ import Login from "./components/Login";
 import PrivateRoute from "./components/PrivateRoute";
 import Categories from "./components/Categories";
 import Records from "./components/Records";
+import Logout from "./components/Logout";
+import AppHeader from "./components/AppHeader";
 
-const { Header, Content, Footer } = Layout;
+const { Content, Footer } = Layout;
 function App() {
   return (
     <Layout>
-      <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
-        <div className="logo" />
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["2"]}></Menu>
-      </Header>
+      <AppHeader />
       <Content
         className="site-layout"
         style={{ padding: "40px", marginTop: 64 }}
       >
-        <div
-          className="site-layout-background"
-          style={{ padding: 24, minHeight: 380 }}
-        >
-          <BrowserRouter>
-            <Routes>
-              <Route element={<PrivateRoute />}>
-                <Route path="/categories" element={<Categories />} />
-              </Route>
-              <Route element={<PrivateRoute />}>
-                <Route path="/records" element={<Records />} />
-              </Route>
-
-              <Route path="/register" element={<SingUp />} />
-              <Route path="/login" element={<Login />} />
-            </Routes>
-          </BrowserRouter>
-        </div>
+        
+          <Routes>
+            <Route element={<PrivateRoute />}>
+              <Route path="/categories" element={<Categories />} />
+            </Route>
+            <Route element={<PrivateRoute />}>
+              <Route path="/records" element={<Records />} />
+            </Route>
+            <Route path="/logout" element={<Logout />} />
+            <Route path="/register" element={<SingUp />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+     
       </Content>
       <Footer style={{ textAlign: "center" }}>
         Spending Tracing @ Mücahit Akbaş 2022
